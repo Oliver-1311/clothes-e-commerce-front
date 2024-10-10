@@ -3,11 +3,13 @@ import LoginIcon from '../assets/signin.gif'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function Login() {
+function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
   const [data, setData] = useState({
+    name:"",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   })
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -23,9 +25,8 @@ function Login() {
     e.preventDefault()
     
   }
-    
   return (
-    <section id="login">
+    <section id="sign-up">
       <div className="container mx-auto p-4 items-center">
         <div className="bg-white p-2 py-5 w-full max-w-md mx-auto px-6">
           <div className="w-20 h-20 mx-auto">
@@ -41,6 +42,20 @@ function Login() {
                   name='email'
                   value={data.email}
                   placeholder="Enter email"
+                  className="outline-none w-full h-full bg-transparent"
+                  onChange={handleOnChange}
+                />
+              </div>
+            </div> 
+            <div >
+              <label htmlFor="name">Name: </label>
+              <div className="bg-slate-100 p-1.5">
+                <input
+                  type="name"
+                  id="name"
+                  name='name'
+                  value={data.name}
+                  placeholder="Enter name"
                   className="outline-none w-full h-full bg-transparent"
                   onChange={handleOnChange}
                 />
@@ -65,6 +80,26 @@ function Login() {
                   <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                 </div>
               </div>
+            </div>
+            <div>
+              <label htmlFor="password">Password: </label>
+              <div className="bg-slate-100 p-1.5 flex">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  name= 'confirmPassword'
+                  value={data.confirmPassword}
+                  placeholder="Enter confirmPassword"
+                  className="outline-none w-full h-full bg-transparent"
+                  onChange={handleOnChange}
+                />
+                <div
+                  className="cursor-pointer text-xl text-slate-500"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  <span>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                </div>
+              </div>
               <Link
                 to={"/forgot-password"}
                 className="block w-fit ml-auto hover:underline hover:text-orange-600"
@@ -76,13 +111,13 @@ function Login() {
               type="submit"
               className="bg-orange-600 text-white px-6 py-2.5 w-full max-w-[150px] rounded-full hover:scale-105 transition-all hover:bg-orange-700 block mx-auto mt-7"
             >
-              Login
+              Sign up
             </button>
           </form>
           <p className="my-4 ">
-            Dont you have account?{" "}
+            Already have account?{" "}
             <span className="text-orange-600 hover:text-orange-700 hover:underline">
-              <Link to={"/sign-up"}>Sign Up</Link>
+              <Link to={"/login"}>Login</Link>
             </span>
           </p>
         </div>
@@ -91,4 +126,4 @@ function Login() {
   );
 }
 
-export default Login
+export default SignUp
